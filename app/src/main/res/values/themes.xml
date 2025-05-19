@@ -1,0 +1,13 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.FctZambranoMainar" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:statusBarColor">@color/grisRed</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
+    <style name="Theme.FctZambranoMainar" parent="Base.Theme.FctZambranoMainar" />
+
+    <style name="Theme.Navigation" parent="Base.Theme.FctZambranoMainar">
+        <item name="colorControlHighlight">@android:color/transparent</item>
+    </style>
+</resources>

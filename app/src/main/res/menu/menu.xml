@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/Inicio"
+            android:icon="@drawable/inicio"
+            android:title="@string/menuInicio"
+            android:checked="true"/>
+        <item
+            android:id="@+id/Buscar"
+            android:icon="@drawable/empresa"
+            android:title="@string/menuBuscar"/>
+        <item
+            android:id="@+id/Lista"
+            android:icon="@drawable/lista"
+            android:title="@string/menuLista"/>
+        <item
+            android:id="@+id/Gemini"
+            android:icon="@drawable/gemini"
+            android:title="@string/menuGemini"/>
+        <item
+            android:id="@+id/ObtenerTags"
+            android:icon="@drawable/tag"
+            android:title="@string/menuObtenerTags"/>
+        <item
+            android:id="@+id/Mapa"
+            android:icon="@drawable/mapa"
+            android:title="@string/menuMapa"/>
+        <item
+            android:id="@+id/Salir"
+            android:icon="@drawable/salir"
+            android:title="@string/menuSalir"/>
+    </group>
+</menu>

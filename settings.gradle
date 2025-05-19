@@ -1,0 +1,18 @@
+pluginManagement { // For managing plugin versions and repositories
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+
+dependencyResolutionManagement { // For managing library dependency versions and repositories
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS) // Good practice
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+rootProject.name = "fctZambranoMainar"
+include ':app'
