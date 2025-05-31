@@ -1,6 +1,7 @@
 package com.zambranomainarjavier.fctzambranomainar;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +14,7 @@ import com.zambranomainarjavier.fctzambranomainar.bd.DAOEmpresa;
 import com.zambranomainarjavier.fctzambranomainar.modelo.Empresa;
 import java.util.List;
 
-public class EmpresaListFragment extends Fragment {
+public class EmpresaLista extends Fragment {
 
     private RecyclerView recyclerView;
     private EmpresaAdapter adapter;
@@ -28,6 +29,12 @@ public class EmpresaListFragment extends Fragment {
 
         DAOEmpresa daoEmpresa = new DAOEmpresa(getContext());
         List<Empresa> listaEmpresas = daoEmpresa.obtenerEmpresas();
+
+        // Imprimir los nombres de las empresas en el log para testeo
+        Log.d("EmpresaLista", "Número de empresas obtenidas: " + listaEmpresas.size());
+        for (Empresa e : listaEmpresas) {
+            Log.d("EmpresaLista", "Empresa: " + e.getNombre());
+        }
 
         adapter = new EmpresaAdapter(listaEmpresas, getContext());
         recyclerView.setAdapter(adapter);

@@ -12,20 +12,54 @@
         android:id="@+id/textoExplicativo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Pulsa el botón para buscar ofertas de trabajo y guardarlas en la base de datos"
+        android:text="@string/mensajeBuscarEmpresas"
         android:textSize="16sp"
         android:textColor="@android:color/black"
         android:gravity="center"
-        android:paddingBottom="16dp"
-        android:textAlignment="center" />
+        android:paddingTop="50dp"
+        android:paddingBottom="20dp"
+        android:textAlignment="center"/>
 
     <Button
         android:id="@+id/btnBuscarOfertas"
         android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="@string/botonBuscarOfertas"
+        android:textSize="18sp"
+        android:textColor="@color/black2"
+        style="@style/BotonPersonalizado"/>
+
+    <TextView
+        android:id="@+id/textoExplicativoFiltro"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Buscar Ofertas"
-        android:padding="12dp"
+        android:text="@string/mensajeBuscarOfertasParametros"
         android:textSize="16sp"
-        android:backgroundTint="@android:color/holo_blue_dark"
-        android:textColor="@android:color/white"/>
+        android:textColor="@android:color/black"
+        android:gravity="center"
+        android:paddingTop="150dp"
+        android:paddingBottom="20dp"
+        android:textAlignment="center"/>
+
+    <EditText
+        android:id="@+id/editTextFiltro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Ejemplo: java developer"
+        android:inputType="text"
+        android:padding="15dp"
+        android:background="@android:drawable/edit_text"
+        android:textColor="@android:color/black"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/btnBuscarConFiltro"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="@string/botonBuscarOfertas"
+        android:textSize="18sp"
+        android:textColor="@color/black2"
+        style="@style/BotonPersonalizado"
+        android:layout_marginTop="16dp"/>
+
 </LinearLayout>

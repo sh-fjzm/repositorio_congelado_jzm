@@ -4,24 +4,30 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.Call;
+import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 /*
     Conexion con la API de RapidAPI para obtener las ofertas de trabajo y poder sacar las empresas
  */
 public class ApiServicio {
-    // Datos que vienen en la web de la API
-    private static final String API_URL = "https://linkedin-job-search-api.p.rapidapi.com/active-jb-7d?limit=10&offset=0&title_filter=%22Data%20Engineer%22&location_filter=%22Zaragoza%22%20OR%20%22zaragoza%22%20OR%20%22ZARAGOZA%22&description_type='text'";
-    private static final String API_KEY = "9cdcdf5b70msh861ba844d2f3889p1208aejsn9ff6ffc3bd4a";
+    /*
+        Datos para conectar con la API de RapidAPI que nos proporciona ofertas de empleo de
+        LinkedIn de las que tomamos los datos para crear objetos empresa y oferta.
+     */
+    // Hay que modificar este valor si se usan otros parametros desde la web de la API (ahora, limit = 10 y description_type = text)
+    private static final String API_URL = "https://linkedin-job-search-api.p.rapidapi.com/active-jb-7d?limit=30&offset=0&location_filter=%22Zaragoza%22%20OR%20%22ZARAGOZA%22%20OR%20%22zaragoza%22&description_type=text";
+    // Hay que modificar este valor
+    private static final String API_KEY = "447dd14821msh1c608d8eeda3010p13ff07jsn42994a12f191";
+    // No hace falta modificar este valor
     private static final String API_HOST = "linkedin-job-search-api.p.rapidapi.com";
 
-    public static JSONObject obtenerDatos() throws JSONException {
-        // Instancia para hacer las peticiones con OkHttp
+    public static JSONArray obtenerDatos() throws JSONException {
         OkHttpClient client = new OkHttpClient();
 
-        // Petición GET a la API
         Request request = new Request.Builder()
                 .url(API_URL)
                 .get()
@@ -31,21 +37,57 @@ public class ApiServicio {
 
         Call call = client.newCall(request);
 
-        /*
-            Se hace la peticion usando OkHttp y si la respuesta es exitosa,
-            la guardamos en un JSONObject y lo devolvemos
-
-            Si falla, se saca un mensaje de error por consola y se devuelve null.
-         */
         try (Response response = call.execute()) {
             if (response.isSuccessful()) {
                 String responseData = response.body().string();
-                return new JSONObject(responseData);
+                return new JSONArray(responseData);
             } else {
                 System.out.println("Error en la respuesta: " + response.code());
             }
         } catch (IOException e) {
-            System.out.println("Error al realizar la petición:");
+            System.out.println("Error al realizar la peticion:");
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    /*
+        Metodo para realizar la busqueda de ofertas con parametros introducidos
+        por el usuario. Se ha cambiado la URL de la API para introducir los
+        parametros en la parte indicada para ello.
+     */
+    public static JSONArray obtenerDatosConParametros(String parametro) throws JSONException {
+        OkHttpClient client = new OkHttpClient();
+
+        try {
+            String filtroEscapado = URLEncoder.encode(parametro.replace("\"", ""), StandardCharsets.UTF_8.toString());
+            String url = API_URL
+                    + "?limit=10"
+                    + "&offset=0"
+                    + "&location_filter=%22Zaragoza%22%20OR%20%22ZARAGOZA%22%20OR%20%22zaragoza%22"
+                    + "&description_filter=" + filtroEscapado
+                    + "&description_type=text";
+
+            Request request = new Request.Builder()
+                    .url(url)
+                    .get()
+                    .addHeader("x-rapidapi-key", API_KEY)
+                    .addHeader("x-rapidapi-host", API_HOST)
+                    .build();
+
+            Call call = client.newCall(request);
+
+            try (Response response = call.execute()) {
+                if (response.isSuccessful()) {
+                    String responseData = response.body().string();
+                    return new JSONArray(responseData);
+                } else {
+                    System.out.println("Error en la respuesta: " + response.code());
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Error al realizar la peticion:");
             e.printStackTrace();
         }
 

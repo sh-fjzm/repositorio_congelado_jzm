@@ -3,8 +3,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="rojoRed">#ed1c24</color>
-    <color name="grisRed">#ededed</color>
+    <color name="grisRed">#DEDEDE</color>
     <color name="rojoOscuroRed">#710D11</color>
     <color name="grisOscuroRed2">#6F6F6F</color>
-    <color name="rojoClaroRed">#EF6D71</color>
+    <color name="rojoClaroRed">#E49D9F</color>
+    <color name="black2">#313131</color>
 </resources>

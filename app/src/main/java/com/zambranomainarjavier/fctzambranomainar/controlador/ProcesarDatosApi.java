@@ -25,6 +25,9 @@ public class ProcesarDatosApi {
     private DAOEmpresa daoEmpresa;
     private DAOOferta daoOferta;
 
+    // Establecer el tamaño que va a tener como maximo el logo que se va a guardar.
+    private static final int LIMITE_PESO_LOGO_BYTES = 600 * 1024;
+
     /*
         Constructor que recibe la llamada del menu Buscar Empresas y crea objetos DAO
         para manejar los datos de las empresas y las ofertas.
@@ -34,13 +37,19 @@ public class ProcesarDatosApi {
         this.daoOferta = new DAOOferta(context);
     }
 
-    public void Procesar(JSONObject jsonData) {
+    public void procesar(JSONArray resultados) {
         try {
-            JSONArray resultados = jsonData.getJSONArray("results");
+
+            System.out.println("Número de resultados recibidos: " + resultados.length()); // 👈 AÑADE AQUÍ
+
+
+
+            // Recorremos el array de resultados con un bucle for que va de 0 a la longitud del array
             for (int i = 0; i < resultados.length(); i++) {
+                // Obtenemos los objetos JSON para cada iteracion del bucle
                 JSONObject item = resultados.getJSONObject(i);
 
-                // ---- EMPRESA ----
+                // Obtener los datos de la empresa
                 String nombre = item.optString("organization", null);
                 String sector = item.optString("linkedin_org_industry", null);
                 String logo = item.optString("organization_logo", null);
@@ -50,17 +59,20 @@ public class ProcesarDatosApi {
                 String web = item.optString("linkedin_org_url", null);
                 String datos = item.optString("linkedin_org_specialties", null);
 
+                // Creamos un objeto empresa con los datos obtenidos
                 Empresa empresa = new Empresa(nombre, sector, logo, direccion, ciudad, linkedin_url, web, datos);
 
                 daoEmpresa.insertarEmpresa(empresa);
 
-                // ---- OFERTA ----
+                // Obtener los datos de la oferta
                 String urlOferta = item.optString("url", null);
                 String fecha = item.optString("date_posted", null);
-                String descripcion = null; // Según tu petición
+                String descripcion = item.optString("description_text", null); // Descripcion de la oferta
 
+                // Creamos un objeto oferta con los datos obtenidos
                 Oferta oferta = new Oferta(urlOferta, descripcion, fecha);
 
+                // Insertamos la oferta en la base de datos empleando el metodo de clase DAO
                 daoOferta.insertarOferta(oferta);
             }
         } catch (JSONException e) {
@@ -68,5 +80,6 @@ public class ProcesarDatosApi {
             System.out.println("Error procesando el JSON de LinkedIn");
         }
     }
+
 }
 

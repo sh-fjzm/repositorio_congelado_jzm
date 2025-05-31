@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:gravity="center_horizontal"
+    android:background="@color/white"
+    >
+
+    <TextView
+        android:id="@+id/tvExplicacion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="@string/mensajeBuscarTags"
+        android:textSize="16sp"
+        android:paddingTop="50dp"
+        android:paddingBottom="20dp" />
+
+    <Button
+        android:id="@+id/btnGenerarTags"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="@string/botonBuscarTags"
+        android:textSize="18sp"
+        android:textColor="@color/black2"
+        style="@style/BotonPersonalizado" />
+</LinearLayout>

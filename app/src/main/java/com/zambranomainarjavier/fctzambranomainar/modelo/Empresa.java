@@ -7,7 +7,7 @@ public class Empresa implements Serializable {
     private long id;
     private String nombre;
     private String sector;
-    private String empresa_logo;
+    private String logo;
     private String direccion;
     private String ciudad;
     private String telefono;
@@ -17,12 +17,12 @@ public class Empresa implements Serializable {
     private String datos; // Campo del JSON linkedin_org_specialties, importante para buscar tags
     private List<Tag> listaTags;
 
-    public Empresa(String nombre, String sector, String empresa_logo,
+    public Empresa(String nombre, String sector, String logo,
                    String direccion, String ciudad, String telefono, String email, String linkedin_url,
                    String web, String datos) {
         this.nombre = nombre;
         this.sector = sector;
-        this.empresa_logo = empresa_logo;
+        this.logo = logo;
         this.direccion = direccion;
         this.ciudad = ciudad;
         this.telefono = telefono;
@@ -32,12 +32,12 @@ public class Empresa implements Serializable {
         this.datos = datos;
     }
 
-    public Empresa(String nombre, String sector, String empresa_logo,
+    public Empresa(String nombre, String sector, String logo,
                    String direccion, String ciudad, String linkedin_url,
                    String web, String datos) {
         this.nombre = nombre;
         this.sector = sector;
-        this.empresa_logo = empresa_logo;
+        this.logo = logo;
         this.direccion = direccion;
         this.ciudad = ciudad;
         this.telefono = null;
@@ -84,8 +84,8 @@ public class Empresa implements Serializable {
         this.sector = sector;
     }
 
-    public void setEmpresa_logo(String logo) {
-        this.empresa_logo = logo;
+    public void setLogo(String logo) {
+        this.logo = logo;
     }
 
     public void setLinkedin_url(String urlLinkedin) {
@@ -129,7 +129,7 @@ public class Empresa implements Serializable {
     }
 
     public String getLogo() {
-        return empresa_logo;
+        return logo;
     }
 
     public String getSector() {
@@ -146,14 +146,6 @@ public class Empresa implements Serializable {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public void setLogo(String logo) {
-        this.empresa_logo = logo;
-    }
-
-    public String getEmpresa_logo() {
-        return empresa_logo;
     }
 
     public void setEmail(String email) {

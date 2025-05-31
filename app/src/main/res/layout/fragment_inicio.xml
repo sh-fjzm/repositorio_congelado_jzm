@@ -1,19 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/rojoClaroRed"
-    android:padding="70dp"
+    android:background="@color/white"
+    android:padding="80dp"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
     tools:context=".Inicio">
 
     <TextView
         android:gravity="center"
-        android:textSize="30dp"
-        android:textColor="@color/white"
+        android:textSize="24dp"
+        android:textColor="@color/black2"
+        android:fontFamily="@font/montserratfont"
         android:textStyle="bold"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/mensajeBienvenida1"/>
+        android:layout_height="wrap_content"
+        android:text="@string/mensajeBienvenida1" />
 
-</FrameLayout>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="220dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="0dp"
+        android:src="@drawable/redempresa" />
+
+    <TextView
+        android:gravity="center"
+        android:textSize="24dp"
+        android:textColor="@color/black2"
+        android:fontFamily="@font/montserratfont"
+        android:textStyle="bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/mensajeBienvenida2" />
+
+</LinearLayout>

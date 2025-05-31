@@ -37,9 +37,9 @@ public class EmpresaAdapter extends RecyclerView.Adapter<EmpresaAdapter.EmpresaV
         holder.txtNombre.setText(empresa.getNombre());
         holder.txtSector.setText(empresa.getSector());
 
-        if (empresa.getEmpresa_logo() != null && !empresa.getEmpresa_logo().isEmpty()) {
+        if (empresa.getLogo() != null && !empresa.getLogo().isEmpty()) {
             Glide.with(context)
-                    .load(empresa.getEmpresa_logo())
+                    .load(empresa.getLogo())
                     .into(holder.imgLogo);
         } else {
             holder.imgLogo.setImageDrawable(null); // deja el ImageView en blanco

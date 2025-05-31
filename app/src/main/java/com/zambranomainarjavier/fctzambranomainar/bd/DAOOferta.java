@@ -39,4 +39,13 @@ public class DAOOferta {
         return false;
     }
 
+    /*
+        Metodo utilizado para obtener la informacion almacenada en el campo descripcion
+        de la tabla oferta. Este campo se va a utilizar para obtener las palabras clave
+        (tags) que se utilizaran para mostrar una lista o un mapa.
+     */
+    public Cursor obtenerDescripciones() {
+        return db.rawQuery("SELECT descripcion FROM oferta", null);
+    }
+
 }

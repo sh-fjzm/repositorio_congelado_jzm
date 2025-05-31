@@ -4,6 +4,8 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+
 import com.zambranomainarjavier.fctzambranomainar.modelo.Empresa;
 import java.util.ArrayList;
 import java.util.List;
@@ -85,7 +87,7 @@ public class DAOEmpresa {
                 Empresa empresa = new Empresa();
                 empresa.setNombre(cursor.getString(cursor.getColumnIndexOrThrow("nombre")));
                 empresa.setSector(cursor.getString(cursor.getColumnIndexOrThrow("sector")));
-                empresa.setEmpresa_logo(cursor.getString(cursor.getColumnIndexOrThrow("empresa_logo")));
+                empresa.setLogo(cursor.getString(cursor.getColumnIndexOrThrow("empresa_logo")));
                 empresa.setDireccion(cursor.getString(cursor.getColumnIndexOrThrow("direccion")));
                 empresa.setCiudad(cursor.getString(cursor.getColumnIndexOrThrow("ciudad")));
                 empresa.setLinkedinUrl(cursor.getString(cursor.getColumnIndexOrThrow("linkedin_url")));
@@ -96,6 +98,18 @@ public class DAOEmpresa {
             } while (cursor.moveToNext());
         }
         cursor.close();
+
+        Log.d("DAOEmpresa", "Empresas obtenidas: " + lista.size());
+
         return lista;
     }
+
+    /*
+        Metodo utilizado para obtener la informacion guardada en el campo datos de la
+        tabla empresa. Este campo contiene informacion relevante de la empresa.
+     */
+    public Cursor obtenerDatosEspecialidades() {
+        return db.rawQuery("SELECT datos FROM empresa", null);
+    }
+
 }

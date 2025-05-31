@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Estilo de los botones -->
+    <style name="BotonPersonalizado" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@null</item>
+        <item name="android:background">@drawable/boton_personalizado</item>
+        <item name="android:textColor">#000000</item>
+        <item name="cornerRadius">8dp</item>
+    </style>
+
+</resources>

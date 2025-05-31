@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="40dp"
-    android:background="@color/grisRed"
+    android:background="@color/white"
     tools:context=".Gemini">
 
     <com.google.android.material.textfield.TextInputLayout
@@ -31,9 +31,11 @@
         android:id="@+id/sendPromptButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ENVIAR"
-        android:textColor="@color/white"
-        android:backgroundTint="@color/grisOscuroRed2"
+        android:text="@string/botonEnviarGemini"
+        android:textColor="@color/black2"
+        android:textSize="18sp"
+        android:layout_gravity="center"
+        style="@style/BotonPersonalizado"
         android:layout_marginTop="20dp"
         app:layout_constraintTop_toBottomOf="@id/promptInputLayout"
         app:layout_constraintEnd_toEndOf="parent" />

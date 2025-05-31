@@ -8,6 +8,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 import com.zambranomainarjavier.fctzambranomainar.modelo.Empresa;
 
+/*
+    Clase para mostrar los detalles ampliados de una empresa despues de mostrar todas las
+    empresas disponibles con EmpresaLista.
+ */
 public class EmpresaDetalleActivity extends AppCompatActivity {
 
     private ImageView imgLogo;
@@ -31,12 +35,14 @@ public class EmpresaDetalleActivity extends AppCompatActivity {
         if (empresa != null) {
             txtNombre.setText(empresa.getNombre());
             txtSector.setText(empresa.getSector());
-            txtDireccion.setText(empresa.getDireccion());
-            txtCiudad.setText(empresa.getCiudad());
+            txtDireccion.setText(limpiarCampo(empresa.getDireccion()));
+            txtCiudad.setText(limpiarCampo(empresa.getCiudad()));
             txtLinkedIn.setText(empresa.getLinkedinUrl());
             txtWeb.setText(empresa.getWeb());
 
-            String logoUrl = empresa.getEmpresa_logo();
+            String logoUrl = empresa.getLogo();
+
+            // Modificaciones en el logo que se muestra de las empresas
             if (logoUrl != null && !logoUrl.isEmpty()) {
                 Glide.with(this)
                         .load(logoUrl)
@@ -45,5 +51,16 @@ public class EmpresaDetalleActivity extends AppCompatActivity {
                 imgLogo.setImageDrawable(null); // Si no hay url de logo, se deja el ImageView vacio
             }
         }
+
+        findViewById(R.id.btnVolver).setOnClickListener(v -> finish());
     }
+
+    // Metodo para eliminar corchetes y comillas que aparecen delante de algunos campos.
+    private String limpiarCampo(String campo) {
+        if (campo != null && campo.startsWith("[\"") && campo.endsWith("\"]")) {
+            return campo.substring(2, campo.length() - 2);
+        }
+        return campo;
+    }
+
 }

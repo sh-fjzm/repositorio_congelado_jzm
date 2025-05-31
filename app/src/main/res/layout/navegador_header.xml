@@ -4,31 +4,28 @@
     android:layout_height="wrap_content"
     android:background="@color/grisRed"
     android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="20dp"
         android:paddingLeft="30dp">
+
         <ImageView
             android:src="@drawable/redempresa"
             android:layout_width="100dp"
             android:layout_height="100dp">
         </ImageView>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
             android:orientation="vertical"
             android:layout_gravity="center">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/bienvenida"
-                android:textSize="20dp"
-                android:textColor="@color/rojoRed"
-                android:textStyle="bold">
-            </TextView>
         </LinearLayout>
+
     </LinearLayout>
+
 </LinearLayout>

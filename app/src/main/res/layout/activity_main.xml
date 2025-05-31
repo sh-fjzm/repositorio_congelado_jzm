@@ -7,26 +7,31 @@
     android:id="@+id/menuHeader"
     tools:openDrawer="start"
     tools:context=".MainActivity">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:paddingTop="40dp"
+            android:paddingTop="30dp"
             android:paddingStart="10dp"
             app:navigationIcon="@drawable/menu"
             android:background="@color/grisRed"
             app:titleTextColor="@color/rojoRed">
         </androidx.appcompat.widget.Toolbar>
+
         <FrameLayout
             android:id="@+id/FrameLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         </FrameLayout>
+
     </LinearLayout>
+
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigationView"
         android:layout_width="wrap_content"
@@ -40,4 +45,5 @@
         app:itemBackground="@drawable/background"
         app:itemTextColor="@color/text_color_state"
         app:itemIconTint="@color/icon_color_state"/>
+
 </androidx.drawerlayout.widget.DrawerLayout>
