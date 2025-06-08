@@ -25,9 +25,6 @@ public class ProcesarDatosApi {
     private DAOEmpresa daoEmpresa;
     private DAOOferta daoOferta;
 
-    // Establecer el tamaño que va a tener como maximo el logo que se va a guardar.
-    private static final int LIMITE_PESO_LOGO_BYTES = 600 * 1024;
-
     /*
         Constructor que recibe la llamada del menu Buscar Empresas y crea objetos DAO
         para manejar los datos de las empresas y las ofertas.
@@ -37,12 +34,16 @@ public class ProcesarDatosApi {
         this.daoOferta = new DAOOferta(context);
     }
 
+    /*
+        Metodo que recibe un JSONArray con los resultados obtenidos desde la API.
+        Recorre cada elemento del array, extrae los campos del JSON,
+        crea objetos Empresa y Oferta con esos datos y los inserta
+        en la base de datos a traves de los DAOs correspondientes.
+     */
     public void procesar(JSONArray resultados) {
         try {
-
-            System.out.println("Número de resultados recibidos: " + resultados.length()); // 👈 AÑADE AQUÍ
-
-
+            // Empleado para hacer testeo de errores
+            System.out.println("Número de resultados recibidos: " + resultados.length());
 
             // Recorremos el array de resultados con un bucle for que va de 0 a la longitud del array
             for (int i = 0; i < resultados.length(); i++) {
@@ -50,6 +51,12 @@ public class ProcesarDatosApi {
                 JSONObject item = resultados.getJSONObject(i);
 
                 // Obtener los datos de la empresa
+                /*
+                    optString es un metodo de la clase JSONObject que permite obtener el valor
+                    de un campo de tipo String del JSON.
+                    Si la clave existe, devuelve el String que contiene.
+                    Si la clave es null, devuelve el valor que se le pasa como segundo parametro (null)
+                 */
                 String nombre = item.optString("organization", null);
                 String sector = item.optString("linkedin_org_industry", null);
                 String logo = item.optString("organization_logo", null);
@@ -61,25 +68,23 @@ public class ProcesarDatosApi {
 
                 // Creamos un objeto empresa con los datos obtenidos
                 Empresa empresa = new Empresa(nombre, sector, logo, direccion, ciudad, linkedin_url, web, datos);
-
+                // Insertamos la empresa en la base de datos usando DAOEmpresa
                 daoEmpresa.insertarEmpresa(empresa);
 
                 // Obtener los datos de la oferta
                 String urlOferta = item.optString("url", null);
                 String fecha = item.optString("date_posted", null);
-                String descripcion = item.optString("description_text", null); // Descripcion de la oferta
+                String descripcion = item.optString("description_text", null);
 
                 // Creamos un objeto oferta con los datos obtenidos
                 Oferta oferta = new Oferta(urlOferta, descripcion, fecha);
-
                 // Insertamos la oferta en la base de datos empleando el metodo de clase DAO
                 daoOferta.insertarOferta(oferta);
             }
         } catch (JSONException e) {
             e.printStackTrace();
-            System.out.println("Error procesando el JSON de LinkedIn");
+            System.out.println("Error procesando el JSON");
         }
     }
-
 }
 

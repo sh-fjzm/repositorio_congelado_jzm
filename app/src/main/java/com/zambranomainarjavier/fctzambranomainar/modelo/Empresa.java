@@ -14,7 +14,11 @@ public class Empresa implements Serializable {
     private String email;
     private String linkedin_url;
     private String web;
-    private String datos; // Campo del JSON linkedin_org_specialties, importante para buscar tags
+    /*
+        Campo del JSON linkedin_org_specialties que contiene información relevante
+        Podriamos usarlo para obtener tags
+     */
+    private String datos;
     private List<Tag> listaTags;
 
     public Empresa(String nombre, String sector, String logo,

@@ -13,15 +13,16 @@ import com.zambranomainarjavier.fctzambranomainar.modelo.Empresa;
     empresas disponibles con EmpresaLista.
  */
 public class EmpresaDetalleActivity extends AppCompatActivity {
-
+    // Declaracion de los componentes de la interfaz
     private ImageView imgLogo;
     private TextView txtNombre, txtSector, txtDireccion, txtCiudad, txtLinkedIn, txtWeb;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Establecemos el layout que se va a mostrar en esta actividad
         setContentView(R.layout.activity_empresa_detalle);
-
+        // Asociamos cada variable con su componente en el activity_empresa_detalle.xml
         imgLogo = findViewById(R.id.imgLogoDetalle);
         txtNombre = findViewById(R.id.txtNombreDetalle);
         txtSector = findViewById(R.id.txtSectorDetalle);
@@ -29,29 +30,30 @@ public class EmpresaDetalleActivity extends AppCompatActivity {
         txtCiudad = findViewById(R.id.txtCiudadDetalle);
         txtLinkedIn = findViewById(R.id.txtLinkedInDetalle);
         txtWeb = findViewById(R.id.txtWebDetalle);
-
+        // Recupera el objeto Empresa enviado desde otra actividad
         Empresa empresa = (Empresa) getIntent().getSerializableExtra("empresa");
-
+        // Si se recibe correctamente una empresa (no esta vacia)
         if (empresa != null) {
+            // Se asigna los valores de la empresa a los campos de texto
             txtNombre.setText(empresa.getNombre());
             txtSector.setText(empresa.getSector());
             txtDireccion.setText(limpiarCampo(empresa.getDireccion()));
             txtCiudad.setText(limpiarCampo(empresa.getCiudad()));
             txtLinkedIn.setText(empresa.getLinkedinUrl());
             txtWeb.setText(empresa.getWeb());
-
             String logoUrl = empresa.getLogo();
 
-            // Modificaciones en el logo que se muestra de las empresas
+            // Carga el logo desde la URL usando Glide
             if (logoUrl != null && !logoUrl.isEmpty()) {
                 Glide.with(this)
                         .load(logoUrl)
                         .into(imgLogo);
             } else {
-                imgLogo.setImageDrawable(null); // Si no hay url de logo, se deja el ImageView vacio
+                // Si no hay url de logo, se deja el ImageView vacio
+                imgLogo.setImageDrawable(null);
             }
         }
-
+        // Accion del boton "Volver" que cierra la activity y vuelve atras
         findViewById(R.id.btnVolver).setOnClickListener(v -> finish());
     }
 
@@ -62,5 +64,4 @@ public class EmpresaDetalleActivity extends AppCompatActivity {
         }
         return campo;
     }
-
 }

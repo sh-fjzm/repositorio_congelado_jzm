@@ -1,5 +1,9 @@
 package com.zambranomainarjavier.fctzambranomainar.modelo;
 
+/*
+    Clase Datos que se utiliza para obtener la informacion de la tabla datos,
+    que hemos usado para realizar pruebas con el script python para obtener tags.
+ */
 public class Datos {
     private String titulo;
     private String empresa;
@@ -49,6 +53,4 @@ public class Datos {
                 "Subcategoria: " + subcategoria +
                 "Localidad: " + localidad;
     }
-
-
 }

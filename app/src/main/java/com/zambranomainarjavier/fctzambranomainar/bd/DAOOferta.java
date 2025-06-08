@@ -15,6 +15,7 @@ public class DAOOferta {
     }
 
     public long insertarOferta(Oferta oferta) {
+        // Comprobamos si ya existe una oferta con la misma url y fecha para evitar duplicados
         if (obtenerPorUrlYFecha(oferta.getUrl(), oferta.getFecha())) {
             // Ya existe la oferta, no la insertamos
             return -1;
@@ -24,17 +25,19 @@ public class DAOOferta {
         values.put("url", oferta.getUrl());
         values.put("descripcion", oferta.getDescripcion());
         values.put("fecha", oferta.getFecha());
-
+        // Insertamos la oferta en la tabla oferta y devolvemos el id insertado
         return db.insert("oferta", null, values);
     }
 
     public boolean obtenerPorUrlYFecha(String url, String fecha) {
+        // Consultamos si existe una oferta con la misma url y fecha
         Cursor cursor = db.rawQuery("SELECT id FROM oferta WHERE url = ? AND fecha = ?", new String[]{url, fecha});
         if (cursor.moveToFirst()) {
             int id = cursor.getInt(0);
             cursor.close();
             return true;
         }
+        // Cerramos cursor para liberar recursos
         cursor.close();
         return false;
     }

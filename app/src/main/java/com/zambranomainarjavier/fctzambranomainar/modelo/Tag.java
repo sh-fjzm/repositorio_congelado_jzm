@@ -21,6 +21,7 @@ public class Tag {
     }
 
     public String toString() {
-        return "Id: " + id + "\nNombre: " + nombre;
+        return "Id: " + id +
+                "\nNombre: " + nombre;
     }
 }
