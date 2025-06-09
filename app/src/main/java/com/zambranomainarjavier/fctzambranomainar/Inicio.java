@@ -6,6 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+/*
+    Esta clase se encarga de mostrar la pantalla de bienvenida cuando se
+    inicia la aplicación (fragment_inicio.xml). Solo muestra el diseño.
+ */
 public class Inicio extends Fragment {
 
     public Inicio() {

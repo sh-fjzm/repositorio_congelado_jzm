@@ -13,8 +13,15 @@ import com.zambranomainarjavier.fctzambranomainar.bd.DAOTag;
 import com.zambranomainarjavier.fctzambranomainar.modelo.Tag;
 import java.util.List;
 
+/*
+    Fragment que se encarga de mostrar la lista de tags como Chips dentro
+    de un ChipGroup usando los datos obtenidos de la tabla Tags.
+    Cargamos la interfaz del XML. Al pulsar el boton, obtenemos los tags de
+    la tabla Tags, se crea un Chip por cada etiqueta de la tabla y se añade
+    al ChipGroup.
+ */
 public class MapaTags extends Fragment {
-
+    // Contenedor donde se van a mostrar las etiquetas.
     private ChipGroup chipGroupTags;
     private DAOTag daoTag;
 
@@ -35,14 +42,15 @@ public class MapaTags extends Fragment {
     }
 
     private void mostrarTags() {
+        // Se obtienen todos los tags desde la base de datos.
         List<Tag> tags = daoTag.obtenerTags();
-
+        // Se limpia el ChipGroup para evitar duplicados.
         chipGroupTags.removeAllViews();
-
+        // Para cada etiqueta, creamos un chip visual
         for (Tag tag : tags) {
             Chip chip = new Chip(getContext());
             chip.setText(tag.getNombre());
-
+            // Deshabilitamos el comportamiento clickable del chip.
             chip.setClickable(false);
             chip.setCheckable(false);
 

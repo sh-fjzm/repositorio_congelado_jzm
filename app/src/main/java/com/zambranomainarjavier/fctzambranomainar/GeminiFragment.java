@@ -10,6 +10,11 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 import com.google.android.material.textfield.TextInputEditText;
 
+/*
+    Clase que implementa el fragment encargado de mostrar la interfaz que contiene Gemini.
+    Cuando el usuario escribe un prompt y lo ejecuta, se envia el mensaje a la API de Gemini
+    y se muestra el resultado en la pantalla.
+ */
 public class GeminiFragment extends Fragment {
 
     private TextInputEditText promptEditText;
@@ -25,7 +30,12 @@ public class GeminiFragment extends Fragment {
         sendPromptButton = view.findViewById(R.id.sendPromptButton);
         progressBar = view.findViewById(R.id.progressBar);
         responseTextView = view.findViewById(R.id.responseTextView);
-
+        /*
+            Listener del boton que ejecuta el prompt.
+            Se obtiene el texto introducido por el usuario. Si el texto esta vacio,
+            se muestra un mensaje. Si hay texto, se muestra un ProgressBar y
+            limpiamos el campo con la respuesta anterior.
+         */
         sendPromptButton.setOnClickListener(v -> {
             String prompt = promptEditText.getText().toString().trim();
             if (prompt.isEmpty()) {
@@ -50,7 +60,6 @@ public class GeminiFragment extends Fragment {
                 }
             });
         });
-
         return view;
     }
 }

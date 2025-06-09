@@ -13,24 +13,41 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import java.io.IOException;
 
+/*
+    Clase que implementa el envio de solicitudes a la API de Gemini usando OkHttp, una libreria
+    para hacer peticiones HTTP en Android.
+    Enviamos un prompt al modelo Gemini de Google y recibimos una respuesta generada por la IA.
+ */
 public class Gemini {
-
+    // Clave de API de Gemini almacenada de forma segura
     private static final String API_KEY = BuildConfig.GEMINI_API_KEY;
+    // URL del endpoint de la API de Gemini
     private static final String URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
 
     private final OkHttpClient client;
     private final Handler mainHandler;
-
+    /*
+        Se crea el cliente HTTP para enviar las solicitudes
+        El handler se usa para ejecutar el codigo de respuesta en el hilo principal de Android
+        Esto es necesario para actualizar la UI.
+     */
     public Gemini() {
         client = new OkHttpClient();
         mainHandler = new Handler(Looper.getMainLooper());
     }
-
+    // Permite recibir la respuesta o un mensaje de error de forma asincrona
     public interface GeminiCallback {
         void onSuccess(String respuesta);
         void onError(String error);
     }
 
+    /*
+        Contruimos un JSON con el mensaje (prompt) que el usuario ha introducido.
+        Enviamos una solicitud POST a la API usando OkHttp.
+        Esperamos la respuesta de la API y, si hay una respuesta valida, la extraemos
+        y devolvemos el texto generado.
+        Si hay un error, se devuelve mediante un callback.
+     */
     public void sendPrompt(String prompt, GeminiCallback callback) {
         try {
             JSONObject jsonBody = new JSONObject();
@@ -46,7 +63,6 @@ public class Gemini {
             contents.put(message);
 
             jsonBody.put("contents", contents);
-
 
             RequestBody body = RequestBody.create(
                     jsonBody.toString(),
@@ -88,9 +104,7 @@ public class Gemini {
                         mainHandler.post(() -> callback.onError("Error parseando respuesta: " + e.getMessage()));
                     }
                 }
-
             });
-
         } catch (Exception e) {
             callback.onError("Error creando solicitud: " + e.getMessage());
         }
